@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCHaiR - The Operating System for Peace Operations Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0a4b78 0%, #1e88e5 50%, #00acc1 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(10, 75, 120, 0.95) 0%, rgba(30, 136, 229, 0.9) 50%, rgba(0, 172, 193, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center/cover;
+            animation: zoomSlow 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomSlow {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            padding: 80px 0;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0a4b78;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .problem-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, #1a1a1a 0%, transparent 20%),
+                url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .problem-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-hero {
+            font-size: 7rem;
+            font-weight: 900;
+            color: #ff4757;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .solutions-grid {
+            background: linear-gradient(to bottom, #f8f9fa 0%, white 100%);
+            padding: 100px 0;
+        }
+
+        .product-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: calc(100% + 80px);
+            height: 200px;
+            margin: -40px -40px 20px -40px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.9) 100%);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #0a4b78;
+        }
+
+        .product-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .market-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .traction-section {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+        }
+
+        .traction-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 80%, white 100%),
+                url('https://images.unsplash.com/photo-1573164713988-8665fc963095?w=1200&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .traction-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            margin-top: 60px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #0a4b78, #00acc1);
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0a4b78;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #0a4b78;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #0a4b78;
+        }
+
+        .funding-section {
+            background: linear-gradient(135deg, #0a4b78 0%, #1e88e5 100%);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .funding-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .breakdown-item {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .breakdown-percentage {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .vision-section {
+            padding: 100px 0;
+            background: 
+                linear-gradient(rgba(26, 26, 26, 0.92), rgba(26, 26, 26, 0.92)),
+                url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1920&q=80') center/cover fixed;
+            color: white;
+            text-align: center;
+        }
+
+        .vision-quote {
+            font-size: 2.5rem;
+            font-weight: 300;
+            max-width: 900px;
+            margin: 60px auto;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .footer {
+            background: #0a0a0a;
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 60px 0;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+            }
+
+            .stat-hero {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .highlight {
+            color: #ff4757;
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Podcast Section Styles */
+        .podcast-section {
+            background: white;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .podcast-hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .podcast-badge {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%);
+            color: white;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .podcast-subtitle {
+            font-size: 1.3rem;
+            color: #555;
+            max-width: 800px;
+            margin: 30px auto;
+            line-height: 1.8;
+        }
+
+        .podcast-cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn-podcast {
+            padding: 18px 35px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-podcast.spotify {
+            background: #1DB954;
+            color: white;
+        }
+
+        .btn-podcast.spotify:hover {
+            background: #1ed760;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(29, 185, 84, 0.4);
+        }
+
+        .btn-podcast.apple {
+            background: #FC3C44;
+            color: white;
+        }
+
+        .btn-podcast.apple:hover {
+            background: #ff5157;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(252, 60, 68, 0.4);
+        }
+
+        .podcast-icon {
+            font-size: 1.2rem;
+        }
+
+        .podcast-about {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 50px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            border: 2px solid #e9ecef;
+        }
+
+        .podcast-section-title {
+            font-size: 2.5rem;
+            color: #0a4b78;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .podcast-description {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .podcast-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin: 80px 0;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid #f8f9fa;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: #0a4b78;
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.6rem;
+            color: #0a4b78;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .podcast-episodes {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .episode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .episode-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 35px 25px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .episode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .episode-card:hover::before {
+            opacity: 1;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .episode-status {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .episode-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .episode-card p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .podcast-subscribe {
+            text-align: center;
+            max-width: 900px;
+            margin: 80px auto 0;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #0a4b78 0%, #1e88e5 100%);
+            border-radius: 20px;
+            color: white;
+        }
+
+        .podcast-subscribe .podcast-section-title {
+            color: white;
+        }
+
+        .subscribe-description {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .social-proof {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .social-btn.youtube {
+            background: #FF0000;
+            color: white;
+        }
+
+        .social-btn.youtube:hover {
+            background: #cc0000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .social-btn.linkedin {
+            background: #0077B5;
+            color: white;
+        }
+
+        .social-btn.linkedin:hover {
+            background: #006399;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.4);
+        }
+
+        .social-btn.spotify {
+            background: #1DB954;
+            color: white;
+        }
+
+        .social-btn.spotify:hover {
+            background: #1ed760;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(29, 185, 84, 0.4);
+        }
+
+        .social-btn.apple {
+            background: #FC3C44;
+            color: white;
+        }
+
+        .social-btn.apple:hover {
+            background: #ff5157;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(252, 60, 68, 0.4);
+        }
+
+        .social-icon {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .podcast-cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-podcast {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .social-links {
+                flex-direction: column;
+            }
+
+            .social-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .podcast-section-title {
+                font-size: 2rem;
+            }
+
+            .podcast-about {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-image-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">🌍 Smart Systems for Safer Missions</div>
+                <h1 class="logo">SCHaiR</h1>
+                <p class="tagline">The Operating System for Peace Operations Training</p>
+                <p class="hero-description">
+                    AI-native immersive training platform transforming how 100,000+ UN peacekeepers prepare for the world's most complex missions. Built in Nairobi. Trusted globally.
+                </p>
+                <div class="cta-group">
+                    <button class="btn btn-primary">Request Demo</button>
+                    <button class="btn btn-secondary">Download White Paper</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <div class="stat-hero">70%</div>
+            <h2 class="section-title">The Preparedness Gap That Costs Lives</h2>
+            <p class="section-subtitle">
+                Every year, over 100,000 UN peacekeepers deploy into conflict zones after just weeks of classroom lectures and generic PowerPoint training. The result: a 70% gap between required skills and actual preparation, leading to preventable casualties, failed civilian protection, and missions that overrun mandates and budgets.
+            </p>
+            <p class="section-subtitle">
+                Global institutions know this. UN DPO, African Union, and regional organizations now list training modernization and immersive technologies as strategic priorities, with dedicated tech-modernization budgets opening between 2025–2027.
+            </p>
+        </div>
+    </section>
+
+    <section class="solutions-grid">
+        <div class="container">
+            <h2 class="section-title" style="color: #1a1a1a;">Meet SCHaiR OS</h2>
+            <p class="section-subtitle" style="color: #555;">
+                An AI-native PeaceTech platform designed specifically for peace operations, built for the realities of the Global South
+            </p>
+
+            <div class="product-cards">
+                <div class="product-card">
+                    <div class="product-icon">🌐</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=600&q=80');"></div>
+                    <h3>CARANA XR</h3>
+                    <p>VR/AR version of the UN's flagship post-conflict exercise. Multi-role, multi-player training in a realistic fictional country with adaptive scenarios.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">🤖</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80');"></div>
+                    <h3>Mission Simulator AI</h3>
+                    <p>Adaptive scenario engine with Red Team agents and civilian populations, trained on decades of real mission data.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">⚡</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80');"></div>
+                    <h3>Content Factory</h3>
+                    <p>AI-assisted pipeline that converts expert narratives into validated simulations in days, not months.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">📊</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80');"></div>
+                    <h3>Impact Quantifier</h3>
+                    <p>Analytics layer measuring learning outcomes, readiness scores, and ROI for missions and donors.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">🎮</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&q=80');"></div>
+                    <h3>Call of Peace</h3>
+                    <p>Gamified experience for UN peacekeepers and peace-enforcers that makes training engaging and memorable.</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-icon">🧠</div>
+                    <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80');"></div>
+                    <h3>Prompt Engineering Masterclass</h3>
+                    <p>AI literacy and prompt engineering for peacekeepers, diplomats, humanitarian staff, EdTech, and universities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="market-section">
+        <div class="container">
+            <h2 class="section-title">Market Opportunity</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$100B+</div>
+                    <div class="metric-label">Total Addressable Market<br>(AI Training, VR/AR, Defence AI, EdTech)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$4.35B</div>
+                    <div class="metric-label">Serviceable Market<br>(Peacekeeping, Military Simulation, Crisis Training)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$650M</div>
+                    <div class="metric-label">Near-term Target<br>(UN & Peace Operations Training Budgets)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$13-33M</div>
+                    <div class="metric-label">5-Year ARR Goal<br>(2-5% Market Capture)</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 80px; text-align: center;">
+                <h3 style="font-size: 2rem; margin-bottom: 30px;">Target Unit Economics (Year 2)</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">$450K</div>
+                        <div class="metric-label">Average Contract Value</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">12:1</div>
+                        <div class="metric-label">LTV:CAC Ratio</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">75-82%</div>
+                        <div class="metric-label">Gross Margin</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">16 mo</div>
+                        <div class="metric-label">Payback Period</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="traction-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #1a1a1a;">Traction & Momentum</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>🤝 Strategic Partnership</h3>
+                    <p>Anchor training partnership with IPSTC (International Peace Support Training Centre, Kenya)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>🌐 UN & AU Engagement</h3>
+                    <p>Active discussions with UN DPO and African Union Peace & Security on pilots and tech-modernization initiatives</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>👥 World-Class Team</h3>
+                    <p>Founding team combines UN Military peacekeeping, UNPOL, UN civilian peacekeeping, humanitarian operations, AI/ML, and VR/AR experience</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>⚡ Hybrid Organizational DNA</h3>
+                    <p>UN DPO's doctrinal clarity meets Silicon Valley product velocity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="funding-section">
+        <div class="container">
+            <h2 class="section-title">Raising $5M Seed Round</h2>
+            <p class="section-subtitle">18-month runway to scale operations and establish market leadership</p>
+
+            <div class="funding-breakdown">
+                <div class="breakdown-item">
+                    <div class="breakdown-percentage">40%</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Product Development</h3>
+                    <p>CARANA XR, Call to Peace, scenario library, AI enhancement</p>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-percentage">30%</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Go-to-Market</h3>
+                    <p>UN procurement, strategic partnerships, sales team expansion</p>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-percentage">20%</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Operations</h3>
+                    <p>HQ infrastructure, deployment systems, team scaling</p>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-percentage">10%</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Working Capital</h3>
+                    <p>Runway buffer and operational flexibility</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="podcast-section">
+        <div class="container">
+            <div class="podcast-hero">
+                <div class="podcast-badge">🎙️ NEW</div>
+                <h2 class="section-title" style="color: #1a1a1a;">The Authoritative Voice in Peacekeeping Innovation</h2>
+                <p class="podcast-subtitle">
+                    Bridging the gap between frontline realities and future technology. Join the conversation with UN commanders, diplomats, and defense experts.
+                </p>
+                <div class="podcast-cta-group">
+                    <button class="btn btn-podcast spotify">
+                        <span class="podcast-icon">▶</span> Listen on Spotify
+                    </button>
+                    <button class="btn btn-podcast apple">
+                        <span class="podcast-icon">🎧</span> Listen on Apple Podcasts
+                    </button>
+                </div>
+            </div>
+
+            <div class="podcast-about">
+                <h3 class="podcast-section-title">Intelligence. Insight. Impact.</h3>
+                <p class="podcast-description">
+                    The SCHaiR Podcast delves into the complexities of global stability. We move beyond the headlines to host deep-dive conversations (45–60 mins) with the people shaping the future of peace operations. From AI and VR training to conflict resolution strategies, we explore what works, what doesn't, and what comes next.
+                </p>
+            </div>
+
+            <div class="podcast-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎖️</div>
+                    <h4>Frontline Voices</h4>
+                    <p>Real-world deployment experiences and lessons learned from UN peacekeepers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h4>Leadership Insights</h4>
+                    <p>High-level strategy from Military Commanders, Ambassadors, and Policymakers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h4>Future Tech</h4>
+                    <p>Exploring how AI, VR, and AR are revolutionizing training and field operations.</p>
+                </div>
+            </div>
+
+            <div class="podcast-episodes">
+                <h3 class="podcast-section-title">Featured Episodes & Upcoming Series</h3>
+                <div class="episode-grid">
+                    <div class="episode-card">
+                        <div class="episode-status">🔴 NEW EPISODE</div>
+                        <h4>Every Thursday</h4>
+                        <p>Fresh insights from the field and boardroom, delivered weekly.</p>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-status">🎬 COMING SOON</div>
+                        <h4>Mission Deep Dives</h4>
+                        <p>Inside specific peacekeeping operations: challenges, victories, and lessons.</p>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-status">👩‍✈️ SERIES</div>
+                        <h4>Women in Peacekeeping</h4>
+                        <p>Amplifying female voices leading change in global security.</p>
+                    </div>
+                    <div class="episode-card">
+                        <div class="episode-status">💡 SERIES</div>
+                        <h4>The Tech of Defense</h4>
+                        <p>How emerging technologies are reshaping modern peace operations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="podcast-subscribe">
+                <h3 class="podcast-section-title">Stay Connected to the Mission</h3>
+                <p class="subscribe-description">
+                    Get unique insights into the changing landscape of global defense and humanitarian aid.
+                </p>
+                <p class="social-proof">
+                    <strong>Join a network of decision-makers, researchers, and innovators.</strong>
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-btn youtube">
+                        <span class="social-icon">📺</span> YouTube
+                    </a>
+                    <a href="#" class="social-btn linkedin">
+                        <span class="social-icon">💼</span> LinkedIn
+                    </a>
+                    <a href="#" class="social-btn spotify">
+                        <span class="social-icon">🎵</span> Spotify
+                    </a>
+                    <a href="#" class="social-btn apple">
+                        <span class="social-icon">🎧</span> Apple Podcasts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title">Vision 2030</h2>
+            <p class="vision-quote">
+                "SCHaiR becomes the default operating system for peace operations training worldwide, with hundreds of thousands of peacekeepers, police, and humanitarian staff trained annually—and measurable reductions in casualties and mission failures."
+            </p>
+            <button class="btn btn-primary" style="margin-top: 40px;">Join Our Mission</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-cta">
+                <h3 style="font-size: 2rem; margin-bottom: 20px;">Ready to Transform Peace Operations Training?</h3>
+                <button class="btn btn-primary">Schedule a Conversation</button>
+            </div>
+            <p style="opacity: 0.7; margin-top: 40px;">© 2025 SCHaiR. Built in Nairobi for a safer world.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.5)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.8s ease-out';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card, .metric-card, .timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
